@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { DynamicLocaleId } from '../utils/dynamic-locale';
 
 
 
@@ -9,7 +11,11 @@ import { HomeComponent } from './home.component';
     HomeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TranslateModule
+  ],
+  providers: [
+    { provide: LOCALE_ID, useClass: DynamicLocaleId, deps: [TranslateService] },
   ]
 })
 export class HomeModule { }

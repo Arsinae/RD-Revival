@@ -21,12 +21,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authService.isConnected().subscribe(authState => {
+    /*this.authService.isConnected().subscribe(authState => {
       if (authState) {
         this.authService.setUser(authState.email);
         this.router.navigate(['/home']);
       }
-    });
+    });*/
   }
 
   connect() {
