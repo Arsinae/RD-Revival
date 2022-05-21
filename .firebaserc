@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "rd-revival": {
+      "hosting": {
+        "rd-revival": [
+          "rd-revival"
+        ]
+      }
+    }
+  }
+}

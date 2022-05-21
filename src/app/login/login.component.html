@@ -1,0 +1,11 @@
+<div class="buttons-list">
+  <mat-form-field>
+    <input matInput type="email" [(ngModel)]="email" placeholder="Adresse mail">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="password" [(ngModel)]="password" placeholder="Mot de passe" (keyup.enter)="connect()">
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" (click)="connect()">Connexion</button>
+</div>
