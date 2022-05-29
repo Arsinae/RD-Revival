@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/server-data/user.service';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private snackbar: MatSnackBar,
+    private dialog: MatDialog,
     private translate: TranslateService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -50,11 +53,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.isConnected().subscribe(authState => {
+    /*this.authService.isConnected().subscribe(authState => {
       if (authState) {
         this.getConnectedUser(authState.uid);
       }
-    });
+    });*/
   }
 
   switchPage(type) {
@@ -68,7 +71,7 @@ export class LoginComponent implements OnInit {
     }).catch((err) => {
       console.log(err);
       const commonErrors = {"auth/user-not-found": "EMAIL_NOT_FOUND", "auth/wrong-password": 'INVALID_PASSWORD', "user-disabled": "USER_DISABLED"}
-      const msg = (err && commonErrors[err.code] === undefined) ? commonErrors[err.code] : 'ERROR';
+      const msg = (err && commonErrors[err.code] !== undefined) ? commonErrors[err.code] : 'ERROR';
       this.snackbar.open(this.translate.instant(`LOGIN.${msg}`), 'OK', {panelClass: 'danger-snackbar', duration: 4000});
     });
   }
@@ -90,6 +93,7 @@ export class LoginComponent implements OnInit {
       const newUser: User = User.setNewUser(this.signUpForm);
       this.userService.createUser(res.user.uid, newUser).then(resUser => {
         newUser.uuid = res.user.uid;
+        console.log(newUser)
         this.snackbar.open(this.translate.instant('SIGNUP.CREATED'), 'OK', {panelClass: 'primary-snackbar', duration: 4000});
         this.authService.setUser(newUser);
         this.router.navigate(['/home']);
@@ -97,8 +101,23 @@ export class LoginComponent implements OnInit {
     }).catch(err => {
       console.log(err);
       const commonErrors = {"auth/email-already-in-use": "EMAIL_ALREADY_USE", "auth/invalid-email": 'INVALID_EMAIL', "uth/weak-password": "WEAK_PASSWORD"}
-      const msg = (err && commonErrors[err.code] === undefined) ? commonErrors[err.code] : 'ERROR';
+      const msg = (err && commonErrors[err.code] !== undefined) ? commonErrors[err.code] : 'ERROR';
+      console.log(msg, commonErrors[err.code]);
       this.snackbar.open(this.translate.instant(`SIGNUP.${msg}`), 'OK', {panelClass: 'danger-snackbar', duration: 4000});
+    })
+  }
+
+  forgetPassword() {
+    this.dialog.open(ForgetPasswordComponent, {data: {email: this.loginForm.get('email').value}, width: '80%'}).afterClosed().subscribe(res => {
+      if (res) {
+        this.authService.sendPasswordResetEmail(res.email).then(() => {
+          this.snackbar.open(this.translate.instant('FORGET_PASSWORD.MAIL_SENT'), 'OK', {panelClass: 'primary-snackbar', duration: 4000});
+        }).catch((err) => {
+          const commonErrors = {"auth/user-not-found": "USER_NOT_FOUND", "auth/invalid-email": 'INVALID_EMAIL'}
+          const msg = (err && commonErrors[err.code] !== undefined) ? commonErrors[err.code] : 'ERROR';
+          this.snackbar.open(this.translate.instant(`FORGET_PASSWORD.${msg}`), 'OK', {panelClass: 'danger-snackbar', duration: 4000});
+        })
+      }
     })
   }
 }

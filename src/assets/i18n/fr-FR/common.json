@@ -1,6 +1,8 @@
 {
   "COMMON": {
     "MAIL": "Adresse mail",
-    "USERNAME": "Nom d'utilisateur"
+    "USERNAME": "Nom d'utilisateur",
+    "VALIDATE": "Valider",
+    "CANCEL": "Annuler"
   }
 }

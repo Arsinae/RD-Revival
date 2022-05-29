@@ -17,7 +17,22 @@
     "CREATED": "Compte créé. Bienvenu sur RD Revival",
     "ERROR": "Erreur à la création du compte",
     "EMAIL_ALREADY_USE": "Un compte existe déja avec cette adresse mail",
-    "INVALID_EMAIL": "Adresse mail Invalide",
+    "INVALID_EMAIL": "Adresse mail invalide",
     "WEAK_PASSWORD": "Mot de passe pas assez sécurisé"
+  },
+  "FORGET_PASSWORD": {
+    "TITLE": "Mot de passe oublié ?",
+    "MAIL_SENT": "Si un compte existe pour cette adresse mail, un mail devrait vous être parvenu",
+    "ERROR": "Erreur durant l'envoi du mail de changement de mot de passe",
+    "INVALID_EMAIL": "Adresse mail invalide",
+    "USER_NOT_FOUND": "Utilisateur inconnu"
+  },
+  "AUTH_ACTION": {
+    "CHANGE_PASSWORD": "Changement de mot de passe",
+    "NEW_PASSWORD": "Nouveau mot de passe",
+    "PASSWORD_CHANGED": "Mot de passe modifié",
+    "ERROR": "Erreur durant le changement de mot de passe",
+    "EXPIRED_CODE": "Code de changement expiré",
+    "INVALID_CODE": "Code de changement invalide"
   }
 }

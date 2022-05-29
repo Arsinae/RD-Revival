@@ -1,0 +1,19 @@
+<form [formGroup]="passwordForm" class="buttons-list" (ngSubmit)="changePassword()">
+  <div class="page-title">{{ 'AUTH_ACTION.CHANGE_PASSWORD' | translate }}</div>
+
+  <mat-form-field>
+    <input matInput type="password" formControlName="password" [placeholder]="'AUTH_ACTION.NEW_PASSWORD' | translate">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="password" formControlName="confirmPassword" [placeholder]="'SIGNUP.CONFIRM_PASSWORD' | translate"
+      [errorStateMatcher]="passwordErrorMatcher">
+    <mat-error *ngIf="passwordForm.hasError('passwordDontMatch')">
+      {{ 'SIGNUP.PASSWORD_DONT_MATCH' | translate }}
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="passwordForm.invalid">
+    {{ 'COMMON.VALIDATE' | translate }}
+  </button>
+</form>

@@ -1,18 +1,25 @@
-<form *ngIf="type === 'login'; else signUp" class="buttons-list" [formGroup]="loginForm" (ngSubmit)="connect()">
-  <mat-form-field>
-    <input matInput type="email" formControlName="email" [placeholder]="'COMMON.MAIL' | translate">
-  </mat-form-field>
+<ng-container *ngIf="type === 'login'; else signUp">
+  <form class="buttons-list" [formGroup]="loginForm" (ngSubmit)="connect()">
+    <mat-form-field>
+      <input matInput type="email" formControlName="email" [placeholder]="'COMMON.MAIL' | translate">
+    </mat-form-field>
 
-  <mat-form-field>
-    <input matInput type="password" formControlName="password" [placeholder]="'LOGIN.PASSWORD' | translate" (keyup.enter)="connect()">
-  </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" formControlName="password" [placeholder]="'LOGIN.PASSWORD' | translate" (keyup.enter)="connect()">
+    </mat-form-field>
 
-  <div class="right-align">
-    <a (click)="switchPage('signup')">{{ 'LOGIN.NO_ACCOUNT' | translate }}</a>
+    <div class="right-align">
+      <a (click)="switchPage('signup')">{{ 'LOGIN.NO_ACCOUNT' | translate }}</a>
+    </div>
+
+    <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">{{ 'LOGIN.LOGIN' | translate }}</button>
+
+  </form>
+
+  <div class="buttons-list">
+    <button mat-button color="accent" (click)="forgetPassword()">{{ 'FORGET_PASSWORD.TITLE' | translate }}</button>
   </div>
-
-  <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">{{ 'LOGIN.LOGIN' | translate }}</button>
-</form>
+</ng-container>
 
 <ng-template #signUp>
   <form class="buttons-list" [formGroup]="signUpForm" (ngSubmit)="createAccount()">

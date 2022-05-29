@@ -42,11 +42,11 @@ export class AuthService {
     return this.auth.sendPasswordResetEmail(email);
   }
 
-  async changePassword(code, password) { // Valide le changement de mot de passe d'un compte
-    const valid = this.auth.verifyPasswordResetCode(code);
-    if (valid) {
-      await this.auth.confirmPasswordReset(code, password);
-    }
-    return valid;
+  verifyPasswordCode(code) {
+    return this.auth.verifyPasswordResetCode(code);
+  }
+
+  changePassword(code, password) {
+    return this.auth.confirmPasswordReset(code, password);
   }
 }

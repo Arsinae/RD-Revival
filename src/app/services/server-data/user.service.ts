@@ -13,7 +13,11 @@ export class UserService {
   ) { }
 
   createUser(uuid: string, user: User) {
-    return this.firestore.collection('user').doc(uuid).set(user)
+    return this.firestore.collection('user').doc(uuid).set({email: user.email, username: user.username, lastLogin: new Date()});
+  }
+
+  setLastLogin(uuid: string) {
+    return this.firestore.collection('user').doc(uuid).update({lastLogin: new Date()});
   }
 
   getUserData(uuid: string) {

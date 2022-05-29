@@ -10,12 +10,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DynamicLocaleId } from '../utils/dynamic-locale';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { AuthActionComponent } from './auth-action/auth-action.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
+    ForgetPasswordComponent,
+    AuthActionComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +35,10 @@ import { DynamicLocaleId } from '../utils/dynamic-locale';
   ],
   exports: [
     LoginComponent,
+    AuthActionComponent
+  ],
+  entryComponents: [
+    ForgetPasswordComponent
   ],
   providers: [
     { provide: LOCALE_ID, useClass: DynamicLocaleId, deps: [TranslateService] },
