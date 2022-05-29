@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DynamicLocaleId } from '../utils/dynamic-locale';
@@ -24,6 +25,7 @@ import { DynamicLocaleId } from '../utils/dynamic-locale';
     TranslateModule,
     MatInputModule,
     MatButtonModule,
+    MatTooltipModule,
     MatSnackBarModule,
     MatDialogModule,
   ],

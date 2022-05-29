@@ -1,5 +1,6 @@
 {
   "COMMON": {
-    "MAIL": "Adresse mail"
+    "MAIL": "Adresse mail",
+    "USERNAME": "Nom d'utilisateur"
   }
 }

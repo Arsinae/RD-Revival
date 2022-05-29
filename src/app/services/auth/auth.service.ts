@@ -1,23 +1,28 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private currentEmail: string = null;
+  private user: User = null;
 
   constructor(
     private auth: AngularFireAuth
   ) { }
+
+  createAccount(mail, password) {
+    return this.auth.createUserWithEmailAndPassword(mail, password)
+  }
 
   authentify(mail, password) { // Connecte un compte avec email et mot de passe
     return this.auth.signInWithEmailAndPassword(mail, password);
   }
 
   disconnect() {
-    this.currentEmail = '';
+    this.user = null;
     return this.auth.signOut();
   }
 
@@ -25,12 +30,12 @@ export class AuthService {
     return this.auth.authState;
   }
 
-  setUser(email) {
-    this.currentEmail = email;
+  setUser(user: User) {
+    this.user = user;
   }
 
-  getCurrentEmail() {
-    return this.currentEmail;
+  getCurrentUser() {
+    return this.getCurrentUser;
   }
 
   sendPasswordResetEmail(email) { // Envoie le mail de changement de mot de passe

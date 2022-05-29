@@ -1,11 +1,49 @@
-<div class="buttons-list">
+<form *ngIf="type === 'login'; else signUp" class="buttons-list" [formGroup]="loginForm" (ngSubmit)="connect()">
   <mat-form-field>
-    <input matInput type="email" [(ngModel)]="email" placeholder="Adresse mail">
+    <input matInput type="email" formControlName="email" [placeholder]="'COMMON.MAIL' | translate">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput type="password" [(ngModel)]="password" placeholder="Mot de passe" (keyup.enter)="connect()">
+    <input matInput type="password" formControlName="password" [placeholder]="'LOGIN.PASSWORD' | translate" (keyup.enter)="connect()">
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="connect()">Connexion</button>
-</div>
+  <div class="right-align">
+    <a (click)="switchPage('signup')">{{ 'LOGIN.NO_ACCOUNT' | translate }}</a>
+  </div>
+
+  <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">{{ 'LOGIN.LOGIN' | translate }}</button>
+</form>
+
+<ng-template #signUp>
+  <form class="buttons-list" [formGroup]="signUpForm" (ngSubmit)="createAccount()">
+    <mat-form-field>
+      <input matInput type="email" formControlName="email" [placeholder]="'COMMON.MAIL' | translate">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="text" formControlName="username" [placeholder]="'COMMON.USERNAME' | translate">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password" formControlName="password" [placeholder]="'LOGIN.PASSWORD' | translate" [matTooltip]="'SIGNUP.PASSWORD_LENGTH' | translate">
+      <mat-error *ngIf="signUpForm.get('password').errors">
+        {{ 'SIGNUP.PASSWORD_LENGTH' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password" formControlName="confirmPassword" [placeholder]="'SIGNUP.CONFIRM_PASSWORD' | translate"
+        [errorStateMatcher]="passwordErrorMatcher">
+      <mat-error *ngIf="signUpForm.hasError('passwordDontMatch')">
+        {{ 'SIGNUP.PASSWORD_DONT_MATCH' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <div class="right-align">
+      <a (click)="switchPage('login')">{{ 'SIGNUP.HAVE_ACCOUNT' | translate }}</a>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">{{ 'SIGNUP.SIGNUP' | translate }}</button>
+  </form>
+</ng-template>
+

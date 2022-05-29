@@ -2,6 +2,22 @@
   "LOGIN": {
     "PASSWORD": "Mot de passe",
     "LOGIN": "Connexion",
-    "ERROR": "Erreur de connexion"
+    "ERROR": "Erreur de connexion",
+    "NO_ACCOUNT": "Vous n'avez pas de compte ? Inscrivez-vous",
+    "EMAIL_NOT_FOUND": "Email / mot de passe non trouvé",
+    "INVALID_PASSWORD": "Mauvais mot de passe",
+    "USER_DISABLED": "Utilisateur désactivé"
+  },
+  "SIGNUP": {
+    "CONFIRM_PASSWORD": "Confirmer votre mot de passe",
+    "PASSWORD_DONT_MATCH": "Les mots de passe ne sont pas similaires",
+    "PASSWORD_LENGTH": "Le mot de passe doit contenir au moins 8 caractères",
+    "SIGNUP": "Créer votre compte",
+    "HAVE_ACCOUNT": "Vous avez un compte ? Connectez-vous",
+    "CREATED": "Compte créé. Bienvenu sur RD Revival",
+    "ERROR": "Erreur à la création du compte",
+    "EMAIL_ALREADY_USE": "Un compte existe déja avec cette adresse mail",
+    "INVALID_EMAIL": "Adresse mail Invalide",
+    "WEAK_PASSWORD": "Mot de passe pas assez sécurisé"
   }
 }
