@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
       console.log(err);
       const commonErrors = {"auth/user-not-found": "EMAIL_NOT_FOUND", "auth/wrong-password": 'INVALID_PASSWORD', "user-disabled": "USER_DISABLED"}
       const msg = (err && commonErrors[err.code] !== undefined) ? commonErrors[err.code] : 'ERROR';
-      this.snackbar.open(this.translate.instant(`LOGIN.${msg}`), 'OK', {panelClass: 'danger-snackbar', duration: 4000});
+      this.snackbar.open(this.translate.instant(`LOGIN.${msg}`), '', {panelClass: 'danger-snackbar', duration: 4000});
     });
   }
 
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
         this.authService.setUser(user);
         this.router.navigate(['/home']);
       } else {
-        this.snackbar.open(this.translate.instant(`LOGIN.ERROR`), 'OK', {panelClass: 'danger-snackbar', duration: 4000});
+        this.snackbar.open(this.translate.instant(`LOGIN.ERROR`), '', {panelClass: 'danger-snackbar', duration: 4000});
       }
     })
   }
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
       this.userService.createUser(res.user.uid, newUser).then(resUser => {
         newUser.uuid = res.user.uid;
         console.log(newUser)
-        this.snackbar.open(this.translate.instant('SIGNUP.CREATED'), 'OK', {panelClass: 'primary-snackbar', duration: 4000});
+        this.snackbar.open(this.translate.instant('SIGNUP.CREATED'), '', {panelClass: 'primary-snackbar', duration: 4000});
         this.authService.setUser(newUser);
         this.router.navigate(['/home']);
       })
@@ -103,19 +103,19 @@ export class LoginComponent implements OnInit {
       const commonErrors = {"auth/email-already-in-use": "EMAIL_ALREADY_USE", "auth/invalid-email": 'INVALID_EMAIL', "uth/weak-password": "WEAK_PASSWORD"}
       const msg = (err && commonErrors[err.code] !== undefined) ? commonErrors[err.code] : 'ERROR';
       console.log(msg, commonErrors[err.code]);
-      this.snackbar.open(this.translate.instant(`SIGNUP.${msg}`), 'OK', {panelClass: 'danger-snackbar', duration: 4000});
+      this.snackbar.open(this.translate.instant(`SIGNUP.${msg}`), '', {panelClass: 'danger-snackbar', duration: 4000});
     })
   }
 
   forgetPassword() {
-    this.dialog.open(ForgetPasswordComponent, {data: {email: this.loginForm.get('email').value}, width: '80%'}).afterClosed().subscribe(res => {
+    this.dialog.open(ForgetPasswordComponent, {data: {email: this.loginForm.get('email').value}, width: '80%', panelClass: 'dark-theme'}).afterClosed().subscribe(res => {
       if (res) {
         this.authService.sendPasswordResetEmail(res.email).then(() => {
-          this.snackbar.open(this.translate.instant('FORGET_PASSWORD.MAIL_SENT'), 'OK', {panelClass: 'primary-snackbar', duration: 4000});
+          this.snackbar.open(this.translate.instant('FORGET_PASSWORD.MAIL_SENT'), '', {panelClass: 'primary-snackbar', duration: 4000});
         }).catch((err) => {
           const commonErrors = {"auth/user-not-found": "USER_NOT_FOUND", "auth/invalid-email": 'INVALID_EMAIL'}
           const msg = (err && commonErrors[err.code] !== undefined) ? commonErrors[err.code] : 'ERROR';
-          this.snackbar.open(this.translate.instant(`FORGET_PASSWORD.${msg}`), 'OK', {panelClass: 'danger-snackbar', duration: 4000});
+          this.snackbar.open(this.translate.instant(`FORGET_PASSWORD.${msg}`), '', {panelClass: 'danger-snackbar', duration: 4000});
         })
       }
     })

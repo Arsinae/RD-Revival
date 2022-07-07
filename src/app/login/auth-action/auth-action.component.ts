@@ -9,7 +9,7 @@ import { PasswordErrorStateMatcher } from '../login.component';
 @Component({
   selector: 'app-auth-action',
   templateUrl: './auth-action.component.html',
-  styleUrls: ['./auth-action.component.scss']
+  styleUrls: ['./../login.component.scss', './auth-action.component.scss']
 })
 export class AuthActionComponent implements OnInit {
 
@@ -51,14 +51,14 @@ export class AuthActionComponent implements OnInit {
   changePassword() {
     this.authService.verifyPasswordCode(this.authCode).then(result => {
       this.authService.changePassword(this.authCode, this.passwordForm.get('password').value).then(res => {
-        this.snackbar.open(this.translate.instant('AUTH_ACTION.PASSWORD_CHANGED'), 'OK', {panelClass: 'primary-snackbar', duration: 4000});
+        this.snackbar.open(this.translate.instant('AUTH_ACTION.PASSWORD_CHANGED'), '', {panelClass: 'primary-snackbar', duration: 4000});
         this.router.navigate(['/login']);
       });
     }).catch(err => {
       console.log(err);
       const commonErrors = {"auth/expired-action-code": "EXPIRED_CODE", "auth/invalid-action-code": 'INVALID_CODE'}
       const msg = (err && commonErrors[err.code] !== undefined) ? commonErrors[err.code] : 'ERROR';
-      this.snackbar.open(this.translate.instant(`AUTH_ACTION.${msg}`), 'OK', {panelClass: 'danger-snackbar', duration: 4000});
+      this.snackbar.open(this.translate.instant(`AUTH_ACTION.${msg}`), '', {panelClass: 'danger-snackbar', duration: 4000});
     })
   }
 }

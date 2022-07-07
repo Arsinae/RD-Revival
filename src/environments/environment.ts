@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyAMH_RMsBXpPkZvbOyjF9pJpFGQffP1YOk",
+    apiKey: "xxxxxxx",
     authDomain: "rd-revival.firebaseapp.com",
     projectId: "rd-revival",
     storageBucket: "rd-revival.appspot.com",
