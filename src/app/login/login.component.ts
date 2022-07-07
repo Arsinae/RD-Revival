@@ -53,11 +53,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*this.authService.isConnected().subscribe(authState => {
+    this.authService.isConnected().subscribe(authState => {
       if (authState) {
         this.getConnectedUser(authState.uid);
       }
-    });*/
+    });
   }
 
   switchPage(type) {
